@@ -1,0 +1,47 @@
+dtmc
+
+const int power = 20;
+const double fuite = 0.9;
+const int threshold_s1 = 50;
+const int threshold_s2 = 25;
+const int threshold_s3 = 15;
+
+module S3
+
+    s3 : [0..1] init 0;        // 0 = inactif et 1 = spike
+    pot_s3 : [0..200] init 0;  // potential of the neuron
+
+    [s] s3=0 & pot_s3 <= threshold_s3 -> 0.2:(s3'=1) + 0.8:(s3'=0) & (pot_s3'=floor(pot_s3 * fuite + s2 * power));
+    [s] s3=0 & pot_s3 > threshold_s3 ->  0.1:(s3'=0) + 0.9:(s3'=1) & (pot_s3'=floor(pot_s3 * fuite + s2 * power));
+    [s] s3=1 -> (s3' = 0) & (pot_s3' = 0);
+
+endmodule
+
+module S2
+
+    s2 : [0..1] init 0;        // 0 = inactif et 1 = spike
+    pot_s2 : [0..200] init 0;  // potential of the neuron
+
+    [s] s2=0 & pot_s2 <= threshold_s2 -> 0.1:(s2'=1) + 0.9:(s2'=0) & (pot_s2'=floor(pot_s2 * fuite + s1 * power));
+    [s] s2=0 & pot_s2 >  threshold_s2 ->  0.1:(s2'=0) + 0.9:(s2'=1) & (pot_s2'=floor(pot_s2 * fuite + s1 * power));
+    [s] s2=1 -> (s2' = 0) & (pot_s2' = 0);
+
+endmodule
+
+module S1
+
+    s1 : [0..1] init 0;       // 0 = inactif et 1 = spike
+    pot_s1 : [0..200] init 0; // potential of the neuron
+
+    [s] s1=0 & pot_s1 <= threshold_s1 -> 0.1:(s1'=1) + 0.9:(s1'=0) & (pot_s1'=floor(pot_s1 * fuite + s0 * power));
+    [s] s1=0 & pot_s1 > threshold_s1 -> 0.1:(s1'=0) + 0.9:(s1'=1) & (pot_s1'=floor(pot_s1 * fuite + s0 * power));
+    [s] s1=1 -> (s1' = 0) & (pot_s1' = 0);
+
+endmodule
+
+module initialisation
+	s0 : [0..1] init 0;
+	[s] true -> 0.5:(s0'=1) + 0.5:(s0'=0);
+endmodule
+
+

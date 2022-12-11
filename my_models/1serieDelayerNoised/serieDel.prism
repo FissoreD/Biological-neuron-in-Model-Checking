@@ -1,0 +1,34 @@
+dtmc
+// Code corrector: a binary string S, is modified such that each
+// bit is repeat 3 times. The message pass through a noiser which can 
+// can  potentially modify the content of the message. The goal is 
+// to rebuild the original message: A one is emitted with a delay of 4 time 
+// units if a 1 was emitted, a zero otherwise.
+
+const double noise = 0.0;
+const int rep = 3; // nb of digit repetition
+
+module S2
+	pot2: [0..10]  init 0;
+	s2 : [0..1];
+	[s] cnt < rep -> (pot2'=ceil(pot2*0.9+s1)) & (s2'=0);
+	[s] cnt = rep & pot2 > 1.5 -> (s2'=1) & (pot2'=0);
+	[s] cnt = rep & pot2 <= 1.5 -> (s2'=0) & (pot2'=0);
+endmodule
+
+
+// this neuron applies a random bit flip on each received signal (the noised channel)
+module S1
+	s1 : [0..1] init 0; 
+    	[s] true -> noise:(s1'=1-s0) + (1-noise):(s1'=s0);
+endmodule
+
+// send the original message with the repetition of each bit 3 times
+module initialisation
+	cnt: [0..rep] init 0;
+	s0 : [0..1] init 0;
+	[s] cnt < rep -> (cnt'=cnt+1);
+	[s] cnt = rep -> 0.5:(s0'=0) + 0.5:(s0'=1) & (cnt'=0);
+endmodule
+
+

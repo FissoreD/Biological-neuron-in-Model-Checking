@@ -1,0 +1,23 @@
+dtmc
+
+module S3
+	s3 : [0..1] init 0; 
+    	[s] true -> (s3'=s2);
+endmodule
+
+module S2
+	s2 : [0..1] init 0; 
+    	[s] true -> (s2'=s1);
+endmodule
+
+module S1
+	s1 : [0..1] init 0; 
+    	[s] true -> (s1'=s0);
+endmodule
+
+module initialisation
+	s0 : [0..1] init 0;
+	[s] true -> 0.5:(s0'=1) + 0.5:(s0'=0);
+endmodule
+
+
