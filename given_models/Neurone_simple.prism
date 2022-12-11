@@ -15,6 +15,11 @@ formula potentiel1 = floor(r*potentiela+k*kx+l*lx);
 	// à chaque temps on divise sa valeur precedente par r 
 	// et on lui rajoute les valeurs des signaux des autres neurones
 
+module transfer
+	z: [0..1];
+	[to] true -> (z'=0);
+	[reset] true -> (z'=1);
+endmodule
 
 module initialisation
 	
