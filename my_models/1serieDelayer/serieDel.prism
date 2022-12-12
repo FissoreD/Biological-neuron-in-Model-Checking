@@ -1,14 +1,8 @@
 dtmc
 
-module S3
-	s3 : [0..1] init 0; 
-    	[s] true -> (s3'=s2);
-endmodule
+module S3 = S1 [s1=s3, s0=s2] endmodule
 
-module S2
-	s2 : [0..1] init 0; 
-    	[s] true -> (s2'=s1);
-endmodule
+module S2 = S1 [s1=s2, s0=s1] endmodule
 
 module S1
 	s1 : [0..1] init 0; 
