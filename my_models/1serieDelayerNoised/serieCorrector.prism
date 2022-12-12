@@ -1,8 +1,8 @@
 dtmc
 // Code corrector: a binary string S, is modified such that each
-// bit is repeat 3 times. The message pass through a noiser which can 
-// can  potentially modify the content of the message. The goal is 
-// to rebuild the original message: A one is emitted with a delay of 4 time 
+// bit is repeat 3 times. The message pass through a noise channel which  
+// can potentially modify the content of the message. The goal is 
+// to rebuild the original message: a one is emitted with a delay of 4 time 
 // units if a 1 was emitted, a zero otherwise.
 
 const double noise = 0.0;
@@ -18,7 +18,8 @@ module S2
 endmodule
 
 
-// this neuron applies a random bit flip on each received signal (the noised channel)
+// this neuron applies a random bit flip (with proba equal to the const noise)
+// on each received signal (the noised channel)
 module S1
 	s1 : [0..1] init 0; 
     	[s] true -> noise:(s1'=1-s0) + (1-noise):(s1'=s0);

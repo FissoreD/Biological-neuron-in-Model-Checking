@@ -1,0 +1,19 @@
+dtmc
+
+module S2
+	s2 : [0..1] init 0;
+	[s] true -> (s2' = s1);
+endmodule
+
+module S1 
+	s1 : [0..1] init 0;
+	[s] true -> (s1' = max(0, e1-s2));
+endmodule
+
+module E1
+	e1 : [0..1] init 1;
+	//[s] true -> 0.5:(e1'=1) + 0.5:(e1'=0);
+	[s] true -> (e1'=1);
+endmodule
+
+
