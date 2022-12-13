@@ -1,7 +1,7 @@
 dtmc
 
-const int power = 3;
 const double fuite = 0.9;
+const int power = 3;
 const int threshold_s1 = 8;
 const int threshold_s2 = 6;
 const int threshold_s3 = 3;
@@ -9,7 +9,7 @@ const int m = 100;
 
 module S3 = S1 [s1=s3, pot_s1=pot_s3, s0=z2, threshold_s1=threshold_s3, to1=to3, reset1=reset3] endmodule
 
-module transf2_3 = transf1_2 [z1=z2, to=to1, reset=reset1] endmodule
+module transf2_3 = transf1_2 [z1=z2, to1=to2, reset1=reset2] endmodule
 
 module S2 = S1 [s1=s2, pot_s1=pot_s2, s0=z1, threshold_s1=threshold_s2, to1=to2, reset1=reset2] endmodule
 
@@ -24,16 +24,21 @@ module S1
     s1 : [0..1] init 0;     // 0 = inactif et 1 = spike
     pot_s1 : [0..m] init 0; // potential of the neuron
 
-    [to1] s1=0 & pot_s1 <= threshold_s1 -> (pot_s1'=ceil(pot_s1 * fuite + s0 * power));
-    [to1] s1=0 & pot_s1 > threshold_s1 -> (s1'=1) & (pot_s1'=ceil(pot_s1 * fuite + s0 * power));
+    [to1] s1=0 & pot_s1 <= threshold_s1/2 -> 
+          (pot_s1'=floor(pot_s1 * fuite + s0 * power));
+    [to1] s1=0 & pot_s1 > threshold_s1/2 & pot_s1 <= threshold_s1 -> 
+          0.2:(s1'=1) + 0.8:(s1'=0) & (pot_s1'=floor(pot_s1 * fuite + s0 * power));
+    [to1] s1=0 & pot_s1 > threshold_s1 -> 
+          (s1'=1) & (pot_s1'=floor(pot_s1 * fuite + s0 * power));
     [reset1] s1=1 -> (s1' = 0) & (pot_s1' = 0);
 
 endmodule
 
 module initialisation
 	s0 : [0..1] init 0;
-	[to] s0=0 -> 1:(s0' = 1);
-	[to] s0=1 -> 1:(s0' = 0);
+	[to1] true -> 0.5:(s0'=1) + 0.5:(s0'=0);
+	//[to1] true -> (s0' = 1-s0);
 endmodule
+
 
 

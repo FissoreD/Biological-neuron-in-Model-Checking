@@ -1,13 +1,16 @@
 dtmc
 
+const int wS1 = 1;
+const int wS2 = -1;
+
 module S2
 	s2 : [0..1] init 0;
-	[s] true -> (s2' = s1);
+	[s] true -> (s2' = wS1 * s1);
 endmodule
 
 module S1 
 	s1 : [0..1] init 0;
-	[s] true -> (s1' = max(0, e1-s2));
+	[s] true -> (s1' = max(0, e1 + wS2 * s2));
 endmodule
 
 module E1
