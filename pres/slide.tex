@@ -1,0 +1,47 @@
+\documentclass[usenames,dvipsnames]{beamer}
+\usetheme{Ilmenau}
+
+\usepackage{hyperref}
+\usepackage[english]{babel}
+\usepackage{Model}
+
+\author{Fissore Davide}
+\title{LI\&F neuron: Series and Negative Loops}
+\subtitle{Model Checking}
+\institute{Université Côte d'Azur}
+\date{Jan. 06, 2023}
+
+\useoutertheme{smoothbars}
+
+\setbeamercolor*{palette quaternary}{use=structure,fg=white,bg=structure.fg!50!black}
+
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+    \begin{figure}[htpb]
+        \begin{center}
+            \includegraphics[width=0.2\linewidth]{pic/logo_master.png}
+        \end{center}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \tableofcontents[hideallsubsections]
+\end{frame}
+
+\begingroup
+\AtBeginSection[] {}
+\input{slides/1intro.tex}
+\input{slides/2series.tex}
+\input{slides/3neg_loop.tex}
+\input{slides/4concl.tex}
+\endgroup
+
+\begin{frame}{}
+    \centering \Large
+    \emph{Thanks}
+\end{frame}
+
+\end{document}
