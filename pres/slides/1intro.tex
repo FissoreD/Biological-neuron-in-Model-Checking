@@ -1,6 +1,18 @@
 \section{Introduction}
 
 \begin{frame}
+  \frametitle{Objective}
+
+  \textit{
+    \begin{enumerate}[<+->]
+      \item Implémenter avec le model checker probabiliste PRISM un neurone biologique de type LI\&F. \item Choisir deux parmi les mini-circuits proposés dans la figure 1 de l'article FCS.pdf, les implémenter en PRISM et tester des propriétés de logique temporelle concernant ces mini-circuits.
+    \end{enumerate}
+  }
+
+\end{frame}
+
+
+\begin{frame}
   \frametitle{The LI\&F neuron}
 
   \begin{definition}[LI\&F: Leaky Integrate and Fire Model]
@@ -9,10 +21,10 @@
 
   \begin{itemize}
     \item Nodes represent the neurons
-    \item The edges (the synaptic connections) can have positive (activators) or negative (inhibitors) weights
-    \item A node contain a membrane potential: if its threshold is overcome, a spike is emitted
-    \item The leak factor, reduce at each time unit the neuron potential
-  \end{itemize}Leaky Integrate and Fire Model
+    \item Edges (the synaptic connections) have either positive (activators) or negative (inhibitors) weights
+    \item Nodes contain a membrane potential: if its threshold is overcome, then a spike is emitted
+    \item The leak factor reduces at each time unit the neuron potential
+  \end{itemize}
 
 
 \end{frame}
