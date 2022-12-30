@@ -61,12 +61,24 @@
 \begin{frame}
   \frametitle{A plot of a $n$-delayer/filter}
 
+  % \begin{figure}
+  %   \includegraphics[width=0.9\textwidth]{pic/simple_serie_corr_plot.png}
+  % \end{figure}
+
+  % \begin{figure}
+  %   \includegraphics[width=0.9\textwidth]{pic/simple_serie_corr_plot_s1.png}
+  % \end{figure}
+
   \begin{figure}
-    \includegraphics[width=0.9\textwidth]{pic/simple_serie_corr_plot.png}
+    \includegraphics[width=0.54\textwidth]{../my_models/1serieDelFil_Corrector/plot_S0.png}
   \end{figure}
 
   \begin{figure}
-    \includegraphics[width=0.9\textwidth]{pic/simple_serie_corr_plot_s1.png}
+    \includegraphics[width=0.54\textwidth]{../my_models/1serieDelFil_Corrector/plot_S1.png}
+  \end{figure}
+
+  \begin{figure}
+    \includegraphics[width=0.54\textwidth]{../my_models/1serieDelFil_Corrector/plot_S2.png}
   \end{figure}
 
 \end{frame}
@@ -75,32 +87,34 @@
   \frametitle{Test certainty of model by noise}
   \begin{align*}
     P \stackrel{?}{=} &
-    \begin{cases}
-      (X^4 ((s_0=1) \Leftrightarrow X^5 (s_2=1))) & \text{if } noise > 0.5 \\
-      (X^4 ((s_0=1) \Leftrightarrow X^4 (s_2=1))) & \text{otherwise}
-    \end{cases}
+    % \begin{cases}
+    % (X^4 ((s_0=1) \Leftrightarrow X^5 (s_2=1))) & \text{if } noise > 0.5 \\
+    (X^4 ((s_0=1) \Leftrightarrow X^4 (s_2=1)))
+    % \end{cases}
   \end{align*}
 
 
 
-  \begin{columns}
-    \begin{column}{0.35\textwidth}
-      \begin{table}[]
-        \begin{tabular}{cc}
-          noise  & proba  \\ \hline
-          $0.00$ & $1.00$ \\
-          $0.10$ & $0.90$ \\
-          $0.50$ & $0.50$ \\
-          $0.90$ & $0.18$ \\
-          $1.00$ & $0.00$
-        \end{tabular}
-      \end{table}
-    \end{column}
-    \begin{column}{0.55\textwidth}  %%<--- here
-      \begin{remark}
-        If the $noise$ is bigger than $0.5$, we have to look at the fifth time-unit: one time-unit is consumed by the $reset$ action.
-      \end{remark}
-    \end{column}
-  \end{columns}
+  \uncover<2->{
+    % \begin{columns}
+    %   \begin{column}{1\textwidth}
+    \begin{table}[]
+      \begin{tabular}{cc}
+        noise                & proba                \\ \hline
+        $0.00$               & $1.00$               \\
+        \uncover<3->{$0.10$} & \uncover<3->{$0.90$} \\
+        \uncover<4->{$0.50$} & \uncover<4->{$0.50$} \\
+        \uncover<5->{$0.90$} & \uncover<5->{$0.10$} \\
+        \uncover<6->{$1.00$} & \uncover<6->{$0.00$}
+      \end{tabular}
+    \end{table}
+    % \end{column}
+    % \begin{column}{0.55\textwidth}  %%<--- here
+    %   \begin{remark}
+    %     If the $noise$ is bigger than $0.5$, we have to look at the fifth time-unit: one time-unit is consumed by the $reset$ action.
+    %   \end{remark}
+    % \end{column}
+    % \end{columns}
+  }
 
 \end{frame}

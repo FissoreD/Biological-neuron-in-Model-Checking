@@ -5,7 +5,7 @@ dtmc
 // to rebuild the original message: a one is emitted with a delay of 4 time 
 // units if a 1 was emitted, a zero otherwise.
 
-const double noise = 0.1;
+const double noise = 0.2;
 const int rep = 3; // nb of digit repetition
 
 module S2
@@ -14,7 +14,7 @@ module S2
 	[s] s2=0 & cnt < rep -> (pot2'=ceil(pot2*0.9+s1)) & (s2'=0);
 	[s] s2=0 & cnt = rep & pot2 > 1.5 -> (s2'=1) & (pot2'=0);
 	[s] s2=0 & cnt = rep & pot2 <= 1.5 -> (pot2'=0);
-	[reset] s2=1 -> (s2'=0) & (pot2'=0);
+	[s] s2=1 -> (s2'=0) & (pot2'=0);
 endmodule
 
 

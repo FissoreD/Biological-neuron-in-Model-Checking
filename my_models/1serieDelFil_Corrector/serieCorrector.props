@@ -12,5 +12,5 @@ P=? [ X X X X (s1=1) ]
 
 P=? [ X X X X ((s0=1)<=>(X X X X s2=1)) ]
 
-P=? [ (noise > 0.5 => (X X X X ((s0=1)<=>(X X X X X s2=1)))) & (noise <= 0.5 => (X X X X ((s0=1)<=>(X X X X s2=1))))]
+P=? [ X X X X ((s0=1)<=>(X X X X s2=1)) ]
 
